@@ -27,7 +27,7 @@
 <!-- Code. -->
 
 
-  <div><h1>Let's Analyze!</h1></div>
+  <div><h1>Tweets!</h1></div>
   
   <table>
 
@@ -41,7 +41,7 @@
 
     </thead>
 
-      <td>Total Subscribers</td><td><canvas id="YourChartNameWithoutSpacesHere" width="400" height="150"></canvas></td>
+      <td>Total Subscribers</td><td><canvas id="tweets" width="400" height="150"></canvas></td>
 
      </td>
 
@@ -53,23 +53,23 @@
         // bar chart data
 
             var barData = {
-                labels : [ "April","May","June","July","August","September" ],
+                labels : {{ tweet_post_id }},
                 datasets : [
                     {
                         fillColor : "#48A497",
                         strokeColor : "#48A4D1",
-                        data : {{ YourColumnNameHere }}
+                        data : {{ views }}
                     }
                 ]
             }
 
             // get bar chart canvas
 
-            var YourChartNameWithoutSpacesHere = document.getElementById("YourChartNameWithoutSpacesHere").getContext("2d");
+            var tweets = document.getElementById("tweets").getContext("2d");
 
             // draw bar chart
 
-            new Chart(YourChartNameWithoutSpacesHere).Bar(barData);
+            new Chart(tweets).Bar(barData);
 
 
        </script>

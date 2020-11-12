@@ -4,23 +4,51 @@ import datetime
 
 db = SQLAlchemy()
 
-# test = YourClassNameHereInTitleCaseSingular(channel_name='WinningCheckers', email_date='2020-01-31',number_subscribers = '1', month_end_at='2019-12-31', subscribers='0', views='1', minutes_watched='2', likes='3', comments='4', posts='5', shares='6')
-
-class YourClassNameHereInTitleCaseSingular(db.Model):
-    """A class for creator ."""
+class Tweet(db.Model):
+    """A class for tweets ."""
     
-    __tablename__ = 'YourTableNameHereLowerCasePlural'
+    __tablename__ = 'tweets'
 
-    YourPrimaryIDColumnNameHereLowerCase_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    twitter_post_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 
-    YourColumnNameHereLowerCase = db.Column(YourDBTypeHereAsdb.typeSuchAsStringIntegerDate)
+    handle = db.Column(db.String)
 
-# keep repeating till all column names finished
+    post_or_reply = db.Column(db.String)
+
+    url = db.Column(db.String)
+
+    content = db.column(db.String)
+
+    comments = db.column(db.Integer)
+
+    views = db.Column(db.Integer)
+
+    hearts = db.Column(db.Integer)
+
+    last_updated = db.Column(db.Date)
 
     def __repr__(self):
-        return f'<YourClassNameHereInTitleCaseSingular YourPrimaryKeyVariableHere={self.YourPrimaryKeyVariableHere} SecondColumnVariableNameHere={self.SecondColumnVariableNameHere}>'
+        return f'<Tweet twitter_post_id={self.twitter_post_id} handle={self.handle}>'
 
-def connect_to_db(flask_app, db_uri='postgresql:///YourDatabaseNamehere', echo=True):
+class Comment(db.Model):
+    """A class for comments."""
+    
+    __tablename__ = 'comments'
+
+    comment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+
+    commentator = db.Column(db.String)
+
+    comment_summary = db.Column(db.String)
+
+    replied_to = db.Column(db.String)
+
+    last_updated=db.Column(db.Date)
+
+    def __repr__(self):
+        return f'<Tweet twitter_post_id={self.twitter_post_id} handle={self.handle}>'
+
+def connect_to_db(flask_app, db_uri='postgresql:///twitter-tweets', echo=True):
    
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
    

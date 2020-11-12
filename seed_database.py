@@ -13,32 +13,65 @@ import model
 import server
 
 
-os.system('dropdb YourFolderUnderscoredAsDatabaseNameHere')
+os.system('dropdb twitter_tweets')
 
-os.system('createdb YourFolderUnderscoredAsDatabaseNameHere')
+os.system('createdb twitter_tweets')
 
 model.connect_to_db(server.app)
 
 model.db.create_all()
 
 
-# Create YourModelNameLowerCasedHere table's initial data.
+# Create tweets table's initial data.
 
-with open('data/YourModelNameLowerCasedSingularHere.json') as f:
+with open('data/tweet.json') as f:
 
-    YourModelNameLowerCasedSingularHere_data = json.loads(f.read())
+    tweet_data = json.loads(f.read())
 
-YourModelNameLowerCasedSingularHere_in_db = []
+tweet_in_db = []
 
-for YourModelNameLowerCasedSingularHere in YourModelNameLowerCasedSingularHere_data:
-    columnNamesSeparatedbyCommasUntilLastOne= (
-                                   YourModelNameLowerCasedSingularHere['YourFirstColumnNameHere'],
-                                   YourModelNameLowerCasedSingularHere['YourNextColumnNameHereTillLast'],
-                                   YourModelNameLowerCasedSingularHere['YourLastColumnNameHere'])
+for tweet in tweet_data:
+    handle, post_or_reply, url, content, comments, views, hearts, last_updated = (
+                                   tweet['handle'],
+                                   tweet['post_or_reply'],
+                                   tweet['url'],
+                                   tweet['content'],
+                                   tweet['comments'],
+                                   tweet['views'],
+                                   tweet['hearts'],
+                                   tweet['last_updated'])
 
-    db_YourModelNameLowerCasedSingularHere = crud.create_YourModelNameLowerCasedSingularHere(
-                                 YourFirstColumnNameHere,
-                                 YourNextColumnNameHereTillLast,
-                                 YourLastColumnNameHere)
+    db_tweet = crud.create_tweet(
+                                 handle,
+                                 post_or_reply,
+                                 url,
+                                 content,
+                                 comments,
+                                 views,
+                                 hearts,
+                                 last_updated)
 
-    YourModelNameLowerCasedSingularHere_in_db.append(db_YourModelNameLowerCasedSingularHere)
+    tweet_in_db.append(db_tweet)
+
+# Create comments table's initial data.
+
+with open('data/comment.json') as f:
+
+    comment_data = json.loads(f.read())
+
+comment_in_db = []
+
+for comment in comment_data:
+    commentator, comment_summary, replied_to, last_updated = (
+                                   comment['commentator'],
+                                   comment['comment_summary'],
+                                   comment['replied_to'],
+                                   comment['last_updated'])
+
+    db_comment = crud.create_comment(
+                                 commentator,
+                                 comment_summary,
+                                 replied_to,
+                                 last_updated)
+
+    comment_in_db.append(db_comment)

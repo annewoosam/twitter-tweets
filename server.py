@@ -10,7 +10,7 @@ db = SQLAlchemy()
 
 # created import allowing connection to database
 
-from model import connect_to_db, YourModelNameTitleCaseSingularStats, db
+from model import connect_to_db, Tweet, Comment db
 
 app = Flask(__name__)
 
@@ -25,21 +25,37 @@ import crud
 
 @app.route('/')
 
-def all_YourModelNameLowerCasePluralStats():
+def all_tweetsandcomments():
 
-    stats=crud.get_YourModelNameLowerCasePlural()
+    stats=crud.get_tweets()
     
-    YourVariableName=[q[0] for q in db.session.query(YourModelNameInTitleCaseHere.YourVariableName).all()]
+    tweet_post_id=[q[0] for q in db.session.query(Tweet.twitter_post_id).all()]
 
-    YourNextVariableName=[q[0] for q in db.session.query(YourModelNameInTitleCaseHere.YourNextVariableName).all()]
-     
-    #repeat till next to last variable accounted for
+    handle=[q[0] for q in db.session.query(Tweet.handle).all()]
       
-    YourLastVariableName=[q[0] for q in db.session.query(YourModelNameInTitleCaseHere.YourLastVariableName).all()]
+    post_or_reply=[q[0] for q in db.session.query(Tweet.post_or_reply).all()]
     
-    # repeat through all columns needed
+    url=[q[0] for q in db.session.query(Tweet.url).all()]
 
-    return render_template('YourModelNameLowerCasePlural.html', YourVariable_Name=YourVariable_Name, YourNextVariableName=YourNextVariableName, YourLastVariableName=YourLastVariableName)
+    content=[q[0] for q in db.session.query(Tweet.content).all()]
+
+    comments=[q[0] for q in db.session.query(Tweet.comments).all()]
+
+    views=[q[0] for q in db.session.query(Tweet.views).all()]
+
+    hearts=[q[0] for q in db.session.query(Tweet.hearts).all()]
+
+    comment_id=[q[0] for q in db.session.query(Comment.comment_id).all()]
+
+    commentator=[q[0] for q in db.session.query(Comment.commentator).all()]
+
+    comment_summary=[q[0] for q in db.session.query(Comment.comment_summary).all()]
+
+    replied_to=[q[0] for q in db.session.query(Comment.replied_to).all()]
+
+    last_updated=[q[0] for q in db.session.query(Comment.last_updated).all()]
+
+    return render_template('tweetsandcomments.html', tweet_post_id=tweet_post_id, handle=handle, post_or_reply=post_or_reply, url=url, content=content, comments=comments, views=views, hearts=hearts, commentator=commentator, comment_summary=comment_summary, replied_to=replied_to, last_updated=last_updated)
 
 if __name__ == '__main__':
 

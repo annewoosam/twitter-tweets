@@ -1,0 +1,24 @@
+[
+	{
+		"tweet_post_id":,
+		"handle":"",
+		"ppst_or_reply":"",
+		"url":"",
+		"content":"",
+		"comments":"",
+		"views":"",
+		"hearts":"",
+		"last_updated":""
+	},
+    {
+		"tweet_post_id":,
+		"handle":"",
+		"ppst_or_reply":"",
+		"url":"",
+		"content":"",
+		"comments":"",
+		"views":"",
+		"hearts":"",
+		"last_updated":""
+	}
+]
